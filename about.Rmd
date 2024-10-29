@@ -1,0 +1,17 @@
+---
+output: html_document
+---
+
+Hi everyone, my name is Xiaohui KANG.
+
+# EDUCATION
+
+I am currently pursuing a Master of Public Health in Epidemiology at Columbia University's Mailman School of Public Health, with a certificate in Applied Biostatistics and Public Health Data Science. My program provides a robust foundation in epidemiological methods, along with specialized training in biostatistics and data science techniques, equipping me to tackle complex public health challenges through data-driven insights. Expected to graduate in 2025, I am excited to apply my skills in epidemiology and data analysis to contribute to meaningful public health initiatives.
+
+
+# WORK EXPERIENCE
+
+1. Peking Union Medical College Hospital (PUMCH) Clinical Research Assistant
+
+* Location: Beijing, China
+* Oct 2018 - Jul 2022
