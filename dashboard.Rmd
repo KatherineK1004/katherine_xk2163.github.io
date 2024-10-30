@@ -1,0 +1,104 @@
+---
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r,message=FALSE,echo=FALSE}
+library(tidyverse)
+library(rnoaa)
+library(plotly)
+library(flexdashboard)
+```
+
+```{r echo=FALSE,message=FALSE}
+nystationids =  
+  ghcnd_stations() |> 
+  filter(state == "NY") |>  
+  distinct(id)
+
+data_df = meteo_pull_monitors(nystationids$id[30], 
+                             date_min = "2001-01-01", 
+                             date_max = "2010-12-31")
+
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r echo=FALSE,message=FALSE}
+# Line plot of precipitation over time
+line_data = 
+  data_df |>
+  filter(!is.na(prcp)) |>
+  mutate(date = as.Date(date))
+
+plotly::plot_ly(
+  data = line_data,
+  x = ~date,
+  y = ~prcp,
+  type = 'scatter',
+  mode = 'lines',
+  line = list(color = 'rgba(22, 96, 167, .8)')
+) |>
+  layout(
+    title = "Precipitation Over Time",
+    xaxis = list(title = "Date"),
+    yaxis = list(title = "Precipitation (mm)")
+  )
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r echo=FALSE,message=FALSE}
+# Box plot for snow depth by month
+box_data = 
+  data_df |>
+  filter(!is.na(snwd)) |>
+  mutate(month = month(date, label = TRUE))
+
+plotly::plot_ly(
+  data = box_data,
+  x = ~month,
+  y = ~snwd,
+  type = 'box',
+  boxpoints = 'all',
+  jitter = 0.3,
+  pointpos = -1.8,
+  marker = list(
+    color = 'rgba(204, 102, 255, 0.5)',
+    outliercolor = 'rgba(255, 65, 54, 0.6)',
+    line = list(outliercolor = 'rgba(255, 65, 54, 0.6)', width = 2))) |>
+  layout(
+    title = "Snow Depth by Month",
+    xaxis = list(title = "Month"),
+    yaxis = list(title = "Snow Depth (mm)"))
+
+```
+
+### Chart C
+
+```{r echo=FALSE,message=FALSE}
+hist_data = 
+  data_df |> 
+  filter(!is.na(prcp))
+
+plotly::plot_ly(
+  data = hist_data,
+  x = ~prcp,
+  type = 'histogram',
+  marker = list(color = 'rgba(100, 200, 102, .8)')) |> 
+  layout(
+    title = "Distribution of Precipitation",
+    xaxis = list(title = "Precipitation (mm)"),
+    yaxis = list(title = "Frequency"))
+
+```
+
