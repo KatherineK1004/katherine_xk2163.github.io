@@ -6,7 +6,7 @@ navbar:
     - text: "About"
       href: about.html
     - text: "Home"
-      href: home.html
+      href: index.html
     - text: "Dashboard"
       href: dashboard.html
     - icon: fa-envelope fa-lg
