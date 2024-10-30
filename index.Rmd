@@ -6,4 +6,4 @@ Hi my name is Katherine Kang!
 
 I want to introduce myslef in this website!
 
-<img src="images/image.jpg" style="width:75%">
+<img src="image/image.jpg" style="width:75%">
